@@ -1,0 +1,17 @@
+*.pdf
+*.aux
+*.log
+*.synctex.gz
+*.lof
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.lol
+*.asv
+*.cb
+*.cb2
+
+# Keep PDF files in root folder
+!/*.pdf

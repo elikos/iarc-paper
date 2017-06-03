@@ -1,0 +1,39 @@
+\section*{Introduction} \label{sec:intro}
+
+\subsection*{Statement of the problem} \label{subsec:intro-problem}
+
+Mission 7a of the International Aerial Robotics Competition involves a sheep and shepherd problem wherein the team’s aerial robot must herd terrestrial robots, hereinafter referred to as targets, by either triggering the top touch paddle or the bump sensor on their front side. The targets must be herded towards a green line within a 20x20-meter arena while dodging obstacle robots made of large PVC pipes roaming the arena in a circular motion. Mission completion is achieved when at least 4 targets, which have been interacted with, cross the green line.
+
+\subsection*{Yearly milestones} \label{subsec:intro-milestones}
+
+Team Elikos participated in the 2014 IARC edition with a Turnigy Talon V2 quadrotor frame modified to hold cameras and an embedded computer as well as wireless communication peripherals. The system was capable of relative position estimation through optical flow and was controlled by an automated ground station. 
+In the 2015 IARC edition, our performance featured an aerial vehicle capable of target identification and pursuit, as well as an improved positioning system using SLAM and a completely revisited platform. 
+Last year, Elikos presented a vehicle with an improved platform, target identification and pursuit, as well as a revisited positioning system. Some major work had also been put in the obstacle avoidance, interaction with grounds robots and functional artificial intelligence modules, although the IARC performance did not demonstrated all those functionalities.
+
+Thereby, this year’s progress for team Elikos follows this work. As described in the present paper, we intend to demonstrate interaction with ground robots as well as stable and fully functional positioning system. Furthermore, the decision-making module of our autonomous vehicle has been greatly improved, thus connecting the different modules and bringing us one step closer to resolving the mission. Finally, some work have been put in the obstacle avoidance module, although we do not plan that the full integration with the rest of the operations will be accomplished by the time of the 2017 IARC edition.
+
+
+\subsection*{Conceptual solution to solve the problem} \label{subsec:intro-solution}
+
+This year’s solution for team Elikos has been developed based on challenges brought by the nature of Mission 7 itself as well as previous years learnings, as listed below:
+
+\textbf{GPS-denied environment}: To compensate for the sterile environment as state by the competition rules - i.e. without externation navigation aids - the arena is filled with a 1-by-1-meter grid. As opposed to previous years, where we focused our work on the surrounding environment’s visual features (ceiling and walls), this year’s work is entirely based on the grid’s features, and entirely developed by our team. With this line of work, we were able to come with a solution specifically focused on the mission’s specifications, especially regarding the indoor aspect as well as the movements of our vehicle. Furthermore, we were able to test our solution both in virtual and physical environments almost identical to the competition’s. Our solution is described in the \textit{Stability Augmentation System} section.
+
+It is important to mention that the position estimation from optical flow integration can quickly diverge from ground truth since every iteration adds small errors to the estimation. Thereby, this estimation, obtained by the PX4Flow Smart Camera, is fused with our visual solution, as explained in the \textit{Control System Architecture} section.
+
+\textbf{Robots interaction}: The second biggest challenge comes from the interaction with the robots, requiring us to perform nearly aggressive vertical movements, and to approach the ground significantly. A direct consequence of this is that we lose all of our visual localization  when doing so, both from the grid’s features and from the optical flow - since the lens of the PX4Flow camera is fixed focus. Furthermore,  the ground effect can make the vehicle drift quickly with no means of it knowing so.
+
+We tackled this problem by bypassing some modules of our usual pipeline in order to program those delicate maneuvers, as described in section \textit{Target Interaction}.
+
+\textbf{High-level commands and strategy}: For the first time this year, we implemented a strategy module calculating the next robot we should interact with. The strategy is based on the position of the robots in relation to the green and red lines. The key aspect of this functionality lies in the ability to know - or estimate - the state of every ground robot. This challenge was tackled by the tracking module, as described in section \textit{Guidance, Navigation, and Control}.
+
+\textbf{Overall hardware architecture}: This year’s solution is very similar to previous years regarding the hardware components. Indeed, we still use an onboard computer based on an Intel i5 processor and the Pixhawk open source flight controller, as those are high-performance off-the-shelf products. The Pixhawk offers an excellent development support and gives us the flexibility that we need. As mentioned before, we use the PX4Flow for optical flow position estimation, and the down-facing LIDAR-Lite laser for altitude measurement. Figure \ref{fig:intro-hardware} presents an overview of our vehicle’s hardware architecture.
+
+This year's biggest alteration lies in the integration of mechanical switches under the landing gear to detect both interactions with ground robots and takeoff and landing operations.
+
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{overall_system_architecture.pdf}
+	\vspace{-0.5cm}
+	\caption{Overall hardware architecture.}
+	\label{fig:intro-hardware}
+\end{figure}

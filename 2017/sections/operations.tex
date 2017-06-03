@@ -1,0 +1,45 @@
+\section*{Operations} \label{sec:op}
+
+\subsection*{Flight preparations} \label{subsec:op-prep}
+
+There are many software and hardware pre- and post-flight checks in place. However, manual verifications are still required to ensure performance and safety during flights, since elements such as mechanical integrity cannot be automatically verified.
+
+\subsubsection*{Pre-flight checklist}
+
+The following is a checklist of elements and statuses that must be verified, at the very least, once before each extended flight session.
+
+\vspace{-0.75cm}
+\begin{enumerate} \itemsep -5pt
+	\item Verify that the overall mechanical structure is undamaged and that the payload is securely mounted
+	\item Verify that the propellers spin in the right directions and are properly tightened
+	\item Verify that the Li-Po batteries are sufficiently charged ($ \approx 16.8 $~V) and well fastened
+	\item Verify that the battery alarm is connected and functional
+	\item Turn on and enable the kill switch transmitter
+	\item Turn on the manual control transmitter
+	\item Connect the batteries and power on the onboard computer, flight controller, and peripherals
+	\item Verify that radio calibration and presets are correct
+	\item Verify that the optical flow and computer vision cameras lenses are focused (and lens covers are removed)
+	\item Calibrate inertial sensors (magnetometers, gyroscopes, accelerometers)
+	\item Verify that telemetry and network communications are functional
+\end{enumerate}
+
+\subsubsection*{Post-flight checklist}
+
+After each flight session or attempt, the following checks must be made.
+
+\vspace{-0.75cm}
+\begin{enumerate} \itemsep -5pt
+	\item Properly terminate every process and data acquisition/logging
+	\item Shut down the onboard computer and other peripherals
+	\item Disconnect the batteries
+	\item Turn off transmitters
+	\item Verify that the battery levels are over the safety threshold and physically intact
+	\item Verify that all component temperatures are within their normal operating temperatures
+	\item Verify that every mount, propeller and screw is properly tightened (especially after a hard landing or a crash)
+\end{enumerate}
+
+\subsection*{Man/machine interface} \label{subsec:op-interface}
+
+Prior to a flight, as mentioned in the \textit{Target Detection} section, a remote calibration tool for the cameras is used to adjust to the environment’s lighting.
+
+In-flight, a SSH connection or a ROS remote connection allows us to monitor flight data over our Wi-Fi network. In case of emergency, the pilot’s transmitter offboard switch permits manual control at all time, and the kill switch’s dedicated transmitter cuts the power of all motors.
